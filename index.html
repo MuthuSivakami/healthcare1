@@ -3,1301 +3,1504 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VitaCare Nursing & Health Center</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Caring Heart Health Care & Nursing Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --teal: #0A7E6E;
-    --teal-light: #12B09A;
-    --teal-pale: #E0F5F2;
-    --teal-dark: #065349;
-    --coral: #F25C3B;
-    --coral-light: #FFF0EC;
-    --gold: #D4A843;
-    --gold-light: #FEF7E8;
-    --navy: #0D2B45;
-    --navy-mid: #1A4060;
-    --white: #FFFFFF;
-    --off-white: #F7FAFA;
-    --gray-100: #F0F4F4;
-    --gray-200: #D8E4E3;
-    --gray-400: #8AABAA;
-    --gray-700: #3A5554;
-    --text: #0D2B45;
-    --text-muted: #527070;
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'DM Sans', sans-serif;
-    --radius: 16px;
-    --radius-lg: 24px;
-    --shadow: 0 8px 40px rgba(10,126,110,0.10);
-    --shadow-lg: 0 20px 60px rgba(10,126,110,0.16);
+    --emerald: #0f6e56;
+    --emerald-light: #1D9E75;
+    --emerald-pale: #E1F5EE;
+    --emerald-dark: #085041;
+    --gold: #BA7517;
+    --gold-light: #EF9F27;
+    --cream: #faf8f5;
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-mid: #4a4a4a;
+    --text-soft: #7a7a7a;
+    --border: rgba(15,110,86,0.15);
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: var(--font-body);
-    color: var(--text);
-    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
     overflow-x: hidden;
-    line-height: 1.6;
+    cursor: none;
   }
 
-  /* ── NAVBAR ── */
+  /* ─── CUSTOM CURSOR ─── */
+  #cursor {
+    position: fixed; top: 0; left: 0;
+    width: 14px; height: 14px;
+    background: var(--emerald);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transition: transform 0.15s ease, background 0.3s ease, width 0.25s ease, height 0.25s ease;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: multiply;
+  }
+  #cursor-ring {
+    position: fixed; top: 0; left: 0;
+    width: 38px; height: 38px;
+    border: 2px solid rgba(15,110,86,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.3s, height 0.3s, border-color 0.3s;
+    transform: translate(-50%, -50%);
+  }
+  body:has(a:hover) #cursor, body:has(button:hover) #cursor {
+    width: 20px; height: 20px; background: var(--gold);
+  }
+  body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring {
+    width: 52px; height: 52px; border-color: rgba(186,117,23,0.5);
+  }
+
+  /* ─── BACKGROUND PARTICLES ─── */
+  #particles-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-12px) rotate(1deg); }
+    66% { transform: translateY(-6px) rotate(-1deg); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(29,158,117,0.3); }
+    50% { box-shadow: 0 0 50px rgba(29,158,117,0.6); }
+  }
+  @keyframes ripple {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  @keyframes borderDance {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  }
+  @keyframes orbFloat {
+    0% { transform: translateY(0) translateX(0) scale(1); }
+    25% { transform: translateY(-30px) translateX(20px) scale(1.05); }
+    50% { transform: translateY(-15px) translateX(-15px) scale(0.95); }
+    75% { transform: translateY(-40px) translateX(10px) scale(1.02); }
+    100% { transform: translateY(0) translateX(0) scale(1); }
+  }
+  @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes waveMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left {
+    opacity: 0; transform: translateX(-50px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right {
+    opacity: 0; transform: translateX(50px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .reveal-scale {
+    opacity: 0; transform: scale(0.85);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+  /* ─── HERO BACKGROUND ORBS ─── */
+  .bg-orb {
+    position: absolute; border-radius: 50%;
+    pointer-events: none; filter: blur(60px);
+  }
+
+  /* ─── NAV ─── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%; height: 72px;
+    position: fixed; top: 0; width: 100%; z-index: 1000;
     background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--gray-200);
-    transition: box-shadow .3s;
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    transition: box-shadow 0.3s, background 0.3s;
   }
-  nav.scrolled { box-shadow: 0 4px 30px rgba(10,126,110,0.08); }
-
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none;
+  nav.scrolled {
+    box-shadow: 0 4px 40px rgba(15,110,86,0.12);
+    background: rgba(255,255,255,0.98);
   }
-  .nav-logo-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo .heart-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--emerald-light), var(--emerald-dark));
+    border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-  }
-  .nav-logo-icon svg { width: 22px; height: 22px; fill: white; }
-  .nav-logo-text { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--navy); }
-  .nav-logo-text span { color: var(--teal); }
-
-  .nav-links {
-    display: flex; align-items: center; gap: 32px;
-    list-style: none;
-  }
-  .nav-links a {
-    text-decoration: none; font-size: 15px; font-weight: 500;
-    color: var(--text-muted); transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--teal); }
-
-  .nav-cta {
-    background: var(--teal); color: white;
-    padding: 10px 24px; border-radius: 50px; border: none;
-    font-family: var(--font-body); font-size: 15px; font-weight: 600;
-    cursor: pointer; text-decoration: none;
-    transition: background .2s, transform .2s, box-shadow .2s;
-    box-shadow: 0 4px 20px rgba(10,126,110,0.30);
-  }
-  .nav-cta:hover {
-    background: var(--teal-dark); transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(10,126,110,0.40);
-  }
-
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: .3s; }
-
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    padding-top: 72px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 0;
-    overflow: hidden;
-    background: linear-gradient(140deg, var(--off-white) 0%, var(--teal-pale) 60%, var(--white) 100%);
+    animation: heartbeat 2s ease-in-out infinite;
     position: relative;
   }
+  .nav-logo .heart-icon::after {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    animation: ripple 2s ease-out infinite;
+    border: 2px solid rgba(29,158,117,0.5);
+  }
+  .nav-logo .heart-icon svg { width: 22px; height: 22px; }
+  .nav-logo-text { line-height: 1.1; }
+  .nav-logo-text .brand { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--emerald-dark); }
+  .nav-logo-text .sub { font-size: 10px; color: var(--text-soft); letter-spacing: 0.05em; text-transform: uppercase; }
 
-  .hero-bg-shape {
-    position: absolute; border-radius: 50%;
-    pointer-events: none; z-index: 0;
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 14px; font-weight: 500; transition: color 0.3s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--emerald-light); transition: width 0.3s; border-radius: 2px; }
+  .nav-links a:hover { color: var(--emerald); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--emerald); color: white !important;
+    padding: 10px 22px; border-radius: 50px;
+    font-size: 13px !important; font-weight: 600 !important;
+    text-decoration: none; transition: all 0.3s !important;
+    box-shadow: 0 4px 15px rgba(15,110,86,0.3);
   }
-  .hero-bg-shape.s1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(10,126,110,0.06) 0%, transparent 70%);
-    top: -100px; right: 200px;
-    animation: pulse-slow 6s ease-in-out infinite;
-  }
-  .hero-bg-shape.s2 {
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(242,92,59,0.06) 0%, transparent 70%);
-    bottom: 0; left: 0;
-    animation: pulse-slow 8s ease-in-out 2s infinite;
+  .nav-cta:hover { background: var(--emerald-dark) !important; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,110,86,0.4) !important; }
+  .nav-cta::after { display: none !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--emerald-dark); border-radius: 2px; transition: all 0.3s; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #f0faf6 0%, #e8f7f1 40%, #faf8f5 100%);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
   }
 
-  @keyframes pulse-slow {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.15); opacity: 0.7; }
+  .hero-orb1 {
+    top: -120px; right: -120px; width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(29,158,117,0.12) 0%, transparent 70%);
+    animation: orbFloat 12s ease-in-out infinite;
+  }
+  .hero-orb2 {
+    bottom: -100px; left: -100px; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(186,117,23,0.09) 0%, transparent 70%);
+    animation: orbFloat 15s ease-in-out 3s infinite reverse;
+  }
+  .hero-orb3 {
+    top: 50%; left: 40%; width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(15,110,86,0.06) 0%, transparent 70%);
+    animation: orbFloat 9s ease-in-out 1s infinite;
   }
 
-  .hero-content {
-    padding: 80px 6% 80px 8%;
-    position: relative; z-index: 1;
-    animation: fadeUp .9s ease both;
+  /* Animated wave at bottom */
+  .hero-wave {
+    position: absolute; bottom: -2px; left: 0; width: 200%; height: 80px;
+    overflow: hidden;
   }
+  .hero-wave svg { animation: waveMove 8s linear infinite; width: 200%; }
+
+  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
 
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--teal-pale); color: var(--teal-dark);
-    border: 1px solid rgba(10,126,110,0.20);
-    padding: 8px 18px; border-radius: 50px;
-    font-size: 13px; font-weight: 600; letter-spacing: .04em;
-    text-transform: uppercase; margin-bottom: 28px;
-    animation: fadeUp 1s ease .1s both;
+    background: rgba(29,158,117,0.1); border: 1px solid rgba(29,158,117,0.2);
+    color: var(--emerald); padding: 6px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 24px; animation: fadeIn 0.8s ease forwards;
   }
-  .hero-badge::before {
-    content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--teal); flex-shrink: 0;
-    animation: blink 2s ease infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .hero-badge .dot { width: 6px; height: 6px; background: var(--emerald-light); border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
 
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(38px, 4.5vw, 62px);
-    line-height: 1.10;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 24px;
-    animation: fadeUp 1s ease .2s both;
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 700; line-height: 1.1;
+    color: var(--text-dark);
+    animation: fadeUp 0.9s ease 0.2s both;
   }
-  .hero-title em { color: var(--teal); font-style: normal; }
-  .hero-title .line-accent {
-    position: relative; display: inline-block;
-  }
-  .hero-title .line-accent::after {
-    content: '';
-    position: absolute; bottom: 4px; left: 0; right: 0;
-    height: 6px; background: rgba(10,126,110,0.18);
-    border-radius: 3px; z-index: -1;
-    transform: scaleX(0); transform-origin: left;
-    animation: underline-reveal 1s ease 1s forwards;
-  }
-  @keyframes underline-reveal { to { transform: scaleX(1); } }
-
-  .hero-sub {
-    font-size: 17px; color: var(--text-muted); line-height: 1.75;
-    max-width: 520px; margin-bottom: 40px;
-    animation: fadeUp 1s ease .3s both;
+  .hero h1 .highlight {
+    color: var(--emerald);
+    background: linear-gradient(90deg, var(--emerald), var(--emerald-light), #3dd6a0, var(--emerald));
+    background-size: 300%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shimmer 4s ease infinite;
   }
 
-  .hero-actions {
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    animation: fadeUp 1s ease .4s both;
-  }
+  .hero-desc { margin: 20px 0 36px; font-size: 17px; color: var(--text-mid); line-height: 1.7; animation: fadeUp 0.9s ease 0.35s both; }
 
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.9s ease 0.5s both; }
   .btn-primary {
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
-    color: white; padding: 16px 34px;
-    border-radius: 50px; border: none; cursor: pointer;
-    font-family: var(--font-body); font-size: 16px; font-weight: 600;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-    box-shadow: 0 8px 30px rgba(10,126,110,0.35);
-    transition: transform .25s, box-shadow .25s;
+    background: linear-gradient(135deg, var(--emerald-light), var(--emerald-dark));
+    background-size: 200%; background-position: 0%;
+    color: white; padding: 15px 32px; border-radius: 50px;
+    font-weight: 600; font-size: 15px;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 25px rgba(15,110,86,0.35);
+    transition: all 0.4s;
   }
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 45px rgba(10,126,110,0.45);
+  .btn-primary:hover { background-position: 100%; transform: translateY(-3px); box-shadow: 0 14px 35px rgba(15,110,86,0.5); }
+  .btn-secondary {
+    background: transparent; color: var(--emerald-dark);
+    padding: 15px 32px; border-radius: 50px;
+    font-weight: 600; font-size: 15px;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    border: 2px solid var(--emerald-light);
+    transition: all 0.3s;
   }
-  .btn-primary svg { width: 18px; height: 18px; fill: none; stroke: white; stroke-width: 2; }
+  .btn-secondary:hover { background: var(--emerald-pale); transform: translateY(-3px); }
 
-  .btn-outline {
-    color: var(--navy); padding: 15px 30px;
-    border-radius: 50px; border: 2px solid var(--gray-200);
-    background: white; cursor: pointer;
-    font-family: var(--font-body); font-size: 16px; font-weight: 600;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-    transition: border-color .2s, color .2s;
-  }
-  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+  .hero-stars { display: flex; align-items: center; gap: 8px; margin-top: 28px; animation: fadeUp 0.9s ease 0.65s both; }
+  .stars { color: #F5A623; font-size: 18px; letter-spacing: 2px; }
+  .hero-stars span { font-size: 13px; color: var(--text-soft); }
+  .hero-stars strong { color: var(--text-dark); }
 
-  .hero-stats {
-    display: flex; gap: 40px; margin-top: 52px;
-    animation: fadeUp 1s ease .5s both;
-  }
-  .stat-item { display: flex; flex-direction: column; gap: 4px; }
-  .stat-num {
-    font-family: var(--font-display); font-size: 32px;
-    font-weight: 700; color: var(--navy); line-height: 1;
-  }
-  .stat-num span { color: var(--teal); }
-  .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  /* Hero Visual */
+  .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; animation: fadeRight 1s ease 0.4s both; }
 
-  .hero-visual {
-    position: relative; height: 100%; min-height: 580px;
-    display: flex; align-items: center; justify-content: center;
-    padding: 60px 8% 60px 4%;
-    animation: fadeRight 1s ease .3s both;
+  /* ─── HERO IMAGE ─── */
+  .hero-img-container {
+    position: relative; width: 420px; height: 480px;
   }
-
-  .hero-img-frame {
-    width: 100%; max-width: 480px;
-    border-radius: var(--radius-lg);
-    overflow: hidden; position: relative;
-    box-shadow: var(--shadow-lg);
+  .hero-main-img {
+    width: 340px; height: 420px;
+    border-radius: 32px 32px 80px 32px;
+    object-fit: cover; object-position: center top;
+    animation: float 7s ease-in-out infinite;
+    box-shadow: 0 30px 80px rgba(15,110,86,0.25);
+    position: absolute; top: 30px; left: 20px;
+  }
+  .hero-img-ring {
+    position: absolute; top: 10px; left: 0; width: 360px; height: 440px;
+    border: 3px dashed rgba(29,158,117,0.25); border-radius: 32px 32px 80px 32px;
+    animation: rotateSlow 20s linear infinite; pointer-events: none;
   }
 
-  .hero-img-frame img {
-    width: 100%; height: 500px; object-fit: cover;
-    display: block;
+  .hero-card-float {
+    position: absolute; background: white; border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12); padding: 16px 20px;
   }
-
-  /* Hero image fallback — animated SVG illustration */
-  .hero-illustration {
-    width: 100%; height: 500px;
-    background: linear-gradient(160deg, #E0F5F2 0%, #B2E4DC 60%, #80CFC4 100%);
-    border-radius: var(--radius-lg);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; position: relative;
-    box-shadow: var(--shadow-lg);
+  .hcf1 {
+    bottom: 30px; right: 0; width: 170px;
+    background: var(--emerald); color: white;
+    animation: float 6s ease-in-out 1s infinite;
+    box-shadow: 0 15px 40px rgba(15,110,86,0.4);
   }
-
-  .floating-card {
-    position: absolute; background: white;
-    border-radius: var(--radius); padding: 14px 18px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    display: flex; align-items: center; gap: 12px;
-    min-width: 180px;
-    animation: float 4s ease-in-out infinite;
-  }
-  .floating-card.card-1 { bottom: 100px; left: -20px; animation-delay: 0s; }
-  .floating-card.card-2 { top: 80px; right: -20px; animation-delay: 1.5s; }
-  .floating-card.card-3 { bottom: 20px; right: 30px; animation-delay: .8s; }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .fc-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
-  }
-  .fc-icon.teal { background: var(--teal-pale); }
-  .fc-icon.coral { background: var(--coral-light); }
-  .fc-icon.gold { background: var(--gold-light); }
-
-  .fc-text p { font-size: 12px; color: var(--text-muted); font-weight: 500; }
-  .fc-text strong { font-size: 14px; color: var(--navy); font-weight: 700; display: block; }
-
-  /* ── SCROLL ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeRight {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity .7s ease, transform .7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-  .reveal.d1 { transition-delay: .1s; }
-  .reveal.d2 { transition-delay: .2s; }
-  .reveal.d3 { transition-delay: .3s; }
-  .reveal.d4 { transition-delay: .4s; }
-
-  /* ── SECTIONS ── */
-  section { padding: 100px 8%; }
-
-  .section-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--teal-pale); color: var(--teal-dark);
-    padding: 6px 16px; border-radius: 50px;
-    font-size: 12px; font-weight: 700; letter-spacing: .06em;
-    text-transform: uppercase; margin-bottom: 16px;
-  }
-  .section-tag::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--teal);
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(30px, 3vw, 46px);
-    line-height: 1.15; font-weight: 700;
-    color: var(--navy); margin-bottom: 16px;
-  }
-  .section-title em { color: var(--teal); font-style: normal; }
-  .section-sub {
-    font-size: 17px; color: var(--text-muted);
-    max-width: 560px; line-height: 1.75;
-  }
-
-  /* ── SERVICES ── */
-  #services { background: var(--off-white); }
-
-  .section-header {
-    text-align: center; margin-bottom: 64px;
-  }
-  .section-header .section-sub { margin: 0 auto; }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 28px;
-  }
-
-  .service-card {
-    background: white; border-radius: var(--radius-lg);
-    padding: 36px 30px;
-    border: 1px solid var(--gray-200);
-    transition: transform .3s, box-shadow .3s, border-color .3s;
-    cursor: default;
-    position: relative; overflow: hidden;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--teal-pale) 0%, transparent 60%);
-    opacity: 0; transition: opacity .3s;
-  }
-  .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
-    border-color: rgba(10,126,110,0.25);
-  }
-  .service-card:hover::before { opacity: 1; }
-
-  .service-icon {
-    width: 60px; height: 60px; border-radius: 16px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px; margin-bottom: 22px;
-    position: relative; z-index: 1;
-  }
-  .service-icon.green { background: var(--teal-pale); }
-  .service-icon.coral { background: var(--coral-light); }
-  .service-icon.gold { background: var(--gold-light); }
-  .service-icon.navy { background: rgba(13,43,69,0.08); }
-
-  .service-title {
-    font-family: var(--font-display); font-size: 22px;
-    font-weight: 600; color: var(--navy);
-    margin-bottom: 12px; position: relative; z-index: 1;
-  }
-  .service-desc {
-    font-size: 15px; color: var(--text-muted); line-height: 1.75;
-    position: relative; z-index: 1;
-  }
-
-  .service-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    color: var(--teal); font-weight: 600; font-size: 14px;
-    text-decoration: none; margin-top: 20px;
-    position: relative; z-index: 1;
-    transition: gap .2s;
-  }
-  .service-link:hover { gap: 10px; }
-  .service-link svg { width: 16px; height: 16px; }
-
-  /* ── WHY CHOOSE US ── */
-  #why {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 80px;
-  }
-
-  .why-visual { position: relative; }
-
-  .why-img-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 16px;
-  }
-  .why-img-block {
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--teal-pale), var(--gray-100));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 64px;
-  }
-  .why-img-block.tall { grid-row: span 2; min-height: 320px; }
-  .why-img-block.short { min-height: 150px; }
-  .why-img-block:first-child { background: linear-gradient(135deg, #0A7E6E 0%, #12B09A 100%); }
-  .why-img-block:nth-child(2) { background: linear-gradient(135deg, var(--coral-light) 0%, #FFD5C8 100%); }
-  .why-img-block:nth-child(3) { background: linear-gradient(135deg, var(--gold-light) 0%, #FFE9A8 100%); }
-
-  .why-badge-pill {
-    position: absolute; bottom: 20px; right: -20px;
-    background: var(--teal); color: white;
-    border-radius: 50px; padding: 12px 20px;
+  .hcf1 .f-num { font-size: 26px; font-weight: 700; }
+  .hcf1 .f-label { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+  .hcf1 .f-tag { font-size: 11px; opacity: 0.7; margin-top: 6px; }
+  .hcf2 {
+    top: 20px; right: 10px; width: 155px;
     display: flex; align-items: center; gap: 10px;
-    box-shadow: 0 8px 30px rgba(10,126,110,0.40);
-    animation: float 4s ease-in-out infinite;
+    animation: float 5s ease-in-out 0.5s infinite;
   }
-  .why-badge-pill strong { font-size: 18px; font-weight: 700; }
-  .why-badge-pill span { font-size: 12px; font-weight: 500; opacity: .85; }
+  .hcf2 .f2-icon { width: 36px; height: 36px; background: var(--emerald-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .hcf2 .f2-icon svg { width: 18px; height: 18px; color: var(--emerald); }
+  .hcf2 .f2-val { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+  .hcf2 .f2-sub { font-size: 11px; color: var(--text-soft); }
+  .hcf3 {
+    top: 50%; left: -20px; transform: translateY(-50%);
+    padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+    animation: float 8s ease-in-out 2s infinite;
+  }
+  .hcf3 .status-dot { width: 10px; height: 10px; background: #22c55e; border-radius: 50%; flex-shrink: 0; animation: pulse 1.5s ease-in-out infinite; }
+  .hcf3 span { font-size: 12px; font-weight: 600; color: var(--text-dark); }
 
-  .why-features { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+  /* ─── STATS ─── */
+  .stats-bar {
+    background: linear-gradient(135deg, var(--emerald-dark) 0%, #0a3d2e 100%);
+    padding: 40px 5%; position: relative; overflow: hidden;
+  }
+  .stats-bar::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; z-index: 1; }
+  .stat-item { text-align: center; color: white; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: #9FE1CB; line-height: 1; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px; }
 
-  .feature-row {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 20px; border-radius: var(--radius);
-    border: 1px solid var(--gray-200);
-    background: white;
-    transition: box-shadow .3s, border-color .3s;
-  }
-  .feature-row:hover {
-    box-shadow: var(--shadow);
-    border-color: rgba(10,126,110,0.20);
-  }
-
-  .feature-icon-wrap {
-    width: 46px; height: 46px; border-radius: 12px;
-    background: var(--teal-pale); display: flex;
-    align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
-  }
-  .feature-text h4 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
-  .feature-text p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
-
-  /* ── DOCTORS ── */
-  #doctors { background: var(--navy); position: relative; overflow: hidden; }
-  #doctors::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at top right, rgba(10,126,110,0.25) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  #doctors .section-tag { background: rgba(10,126,110,0.25); color: #7DE8D8; }
-  #doctors .section-title { color: white; }
-  #doctors .section-sub { color: rgba(255,255,255,0.65); }
-
-  .doctors-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 24px;
-    margin-top: 56px;
-  }
-
-  .doctor-card {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: var(--radius-lg);
-    padding: 30px 24px;
-    text-align: center;
-    transition: transform .3s, background .3s;
-  }
-  .doctor-card:hover {
-    transform: translateY(-6px);
-    background: rgba(255,255,255,0.12);
-  }
-
-  .doctor-avatar {
-    width: 88px; height: 88px; border-radius: 50%;
-    margin: 0 auto 16px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 36px; font-weight: 700;
-    color: white; font-family: var(--font-display);
-  }
-  .doctor-avatar.a { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%); }
-  .doctor-avatar.b { background: linear-gradient(135deg, #D4A843, #F0C878); }
-  .doctor-avatar.c { background: linear-gradient(135deg, #F25C3B, #FF8D72); }
-  .doctor-avatar.d { background: linear-gradient(135deg, #5A67D8, #818CF8); }
-
-  .doctor-name {
-    font-family: var(--font-display); font-size: 18px;
-    font-weight: 600; color: white; margin-bottom: 4px;
-  }
-  .doctor-spec {
-    font-size: 13px; color: var(--teal-light); font-weight: 500;
+  /* ─── SECTION BASE ─── */
+  section { padding: 90px 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block; background: var(--emerald-pale);
+    color: var(--emerald-dark); padding: 5px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
     margin-bottom: 14px;
   }
-  .doctor-exp {
-    display: inline-block;
-    background: rgba(255,255,255,0.10);
-    color: rgba(255,255,255,0.75);
-    border-radius: 50px; padding: 5px 14px;
-    font-size: 12px; font-weight: 600;
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.2; color: var(--text-dark); margin-bottom: 16px; }
+  .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.7; max-width: 560px; }
+
+  /* ─── ABOUT ─── */
+  .about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+  .about-visual { position: relative; }
+  .about-img-wrap {
+    position: relative; border-radius: 32px; overflow: hidden;
+    width: 100%; aspect-ratio: 4/4.5;
+    animation: borderDance 8s ease-in-out infinite;
+    box-shadow: 0 30px 80px rgba(15,110,86,0.2);
   }
-
-  /* ── TESTIMONIALS ── */
-  #testimonials { background: var(--off-white); }
-
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    margin-top: 56px;
+  .about-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    transition: transform 0.6s ease;
   }
+  .about-img-wrap:hover img { transform: scale(1.05); }
+  .about-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(8,80,65,0.6) 100%);
+  }
+  .about-img-text {
+    position: absolute; bottom: 24px; left: 24px; right: 24px;
+    color: white;
+  }
+  .about-img-text h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 4px; }
+  .about-img-text p { font-size: 13px; opacity: 0.85; }
 
-  .testimonial-card {
-    background: white; border-radius: var(--radius-lg);
-    padding: 32px 28px;
-    border: 1px solid var(--gray-200);
-    transition: transform .3s, box-shadow .3s;
+  .about-badge-img {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--gold); color: white;
+    border-radius: 20px; padding: 18px 22px;
+    box-shadow: 0 10px 30px rgba(186,117,23,0.4);
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  .about-badge-img .ab-num { font-size: 28px; font-weight: 700; line-height: 1; }
+  .about-badge-img .ab-label { font-size: 11px; opacity: 0.9; margin-top: 3px; }
+
+  .about-content .checklist { list-style: none; margin: 24px 0; display: flex; flex-direction: column; gap: 12px; }
+  .about-content .checklist li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-mid); line-height: 1.5; }
+  .checklist .check { width: 22px; height: 22px; background: var(--emerald-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .checklist .check svg { width: 12px; height: 12px; color: var(--emerald); }
+
+  /* ─── SERVICES ─── */
+  .services { background: var(--cream); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; flex-wrap: wrap; gap: 20px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .service-card {
+    background: white; border-radius: 24px; padding: 0;
+    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative; overflow: hidden; cursor: default;
+  }
+  .service-card-img {
+    width: 100%; height: 200px; overflow: hidden;
     position: relative;
   }
-  .testimonial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+  .service-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
   }
-  .testimonial-card::before {
-    content: '\201C';
-    position: absolute; top: 16px; right: 24px;
-    font-family: var(--font-display); font-size: 80px;
-    color: var(--teal-pale); line-height: 1; font-weight: 700;
+  .service-card:hover .service-card-img img { transform: scale(1.08); }
+  .service-card-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(8,80,65,0.5) 100%);
   }
-
-  .stars { display: flex; gap: 4px; margin-bottom: 16px; }
-  .star { color: var(--gold); font-size: 16px; }
-
-  .testimonial-text {
-    font-size: 15px; color: var(--text-muted);
-    line-height: 1.75; margin-bottom: 24px;
-    position: relative; z-index: 1;
+  .service-card-body { padding: 24px; }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 4px; background: linear-gradient(90deg, var(--emerald-light), var(--emerald-dark));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s; z-index: 2;
   }
+  .service-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(15,110,86,0.15); border-color: rgba(29,158,117,0.3); }
+  .service-card:hover::before { transform: scaleX(1); }
 
-  .testimonial-author { display: flex; align-items: center; gap: 12px; }
-  .author-avatar {
-    width: 44px; height: 44px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 16px; color: white; flex-shrink: 0;
+  .service-icon {
+    width: 50px; height: 50px; border-radius: 14px;
+    background: var(--emerald-pale); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px; transition: all 0.3s;
   }
-  .author-avatar.a { background: linear-gradient(135deg, var(--teal), var(--teal-light)); }
-  .author-avatar.b { background: linear-gradient(135deg, #D4A843, #F0C878); }
-  .author-avatar.c { background: linear-gradient(135deg, var(--coral), #FF8D72); }
+  .service-icon svg { width: 26px; height: 26px; color: var(--emerald); }
+  .service-card:hover .service-icon { background: var(--emerald); }
+  .service-card:hover .service-icon svg { color: white; }
+  .service-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text-dark); }
+  .service-card p { font-size: 14px; color: var(--text-soft); line-height: 1.6; }
+  .service-card .service-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 14px; font-size: 13px; font-weight: 600;
+    color: var(--emerald); text-decoration: none;
+    opacity: 0; transform: translateX(-10px); transition: all 0.3s;
+  }
+  .service-card:hover .service-link { opacity: 1; transform: translateX(0); }
 
-  .author-name { font-size: 15px; font-weight: 600; color: var(--navy); }
-  .author-detail { font-size: 13px; color: var(--text-muted); }
+  /* ─── WHY US ─── */
+  .why { background: var(--emerald-dark); color: white; position: relative; overflow: hidden; }
+  .why::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+  .why .section-title { color: white; }
+  .why .section-desc { color: rgba(255,255,255,0.7); }
+  .why .section-tag { background: rgba(255,255,255,0.1); color: #9FE1CB; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 50px; }
+  .why-features { display: flex; flex-direction: column; gap: 20px; }
+  .why-feature {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 20px; background: rgba(255,255,255,0.05);
+    border-radius: 16px; border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.3s;
+  }
+  .why-feature:hover { background: rgba(255,255,255,0.1); border-color: rgba(29,158,117,0.4); transform: translateX(8px); }
+  .why-feature-icon { width: 46px; height: 46px; background: rgba(29,158,117,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .why-feature-icon svg { width: 24px; height: 24px; color: #9FE1CB; }
+  .why-feature h4 { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+  .why-feature p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
 
-  /* ── APPOINTMENT / CTA ── */
-  #appointment {
-    background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 50%, var(--teal-light) 100%);
-    padding: 80px 8%;
+  /* Why Us image side */
+  .why-image-side { position: relative; }
+  .why-img-main {
+    width: 100%; height: 440px;
+    border-radius: 28px; object-fit: cover; object-position: center;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+  }
+  .why-img-badge {
+    position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%);
+    background: white; border-radius: 20px; padding: 20px 28px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    text-align: center; white-space: nowrap;
+  }
+  .why-img-badge .big-heart { font-size: 36px; display: block; line-height: 1; margin-bottom: 6px; animation: heartbeat 2.5s ease-in-out infinite; }
+  .why-img-badge h3 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--text-dark); margin-bottom: 4px; }
+  .why-img-badge .rating { display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .why-img-badge .rating .stars { color: #FAC775; font-size: 16px; }
+  .why-img-badge .rating span { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+  .why-img-badge .rating small { color: var(--text-soft); font-size: 12px; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials { background: white; }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+  .testi-card {
+    background: var(--cream); border-radius: 20px; padding: 28px;
+    border: 1px solid var(--border); transition: all 0.4s;
     position: relative; overflow: hidden;
   }
-  #appointment::before {
-    content: '';
-    position: absolute; width: 500px; height: 500px;
-    border-radius: 50%; border: 2px solid rgba(255,255,255,0.08);
-    top: -200px; right: -100px;
-    animation: spin-slow 30s linear infinite;
+  .testi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(29,158,117,0.04) 100%);
+    transition: opacity 0.3s;
   }
-  #appointment::after {
-    content: '';
-    position: absolute; width: 300px; height: 300px;
-    border-radius: 50%; border: 2px solid rgba(255,255,255,0.06);
-    bottom: -100px; left: 100px;
-    animation: spin-slow 20s linear reverse infinite;
+  .testi-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+  .testi-card .quote-mark { font-size: 60px; color: var(--emerald-light); line-height: 0.8; font-family: Georgia, serif; margin-bottom: 14px; }
+  .testi-card p { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0;
+    border: 2px solid var(--emerald-pale);
   }
-  @keyframes spin-slow { to { transform: rotate(360deg); } }
-
-  .appt-inner {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
-    position: relative; z-index: 1;
-  }
-
-  .appt-text { color: white; }
-  .appt-text .section-tag { background: rgba(255,255,255,0.15); color: white; }
-  .appt-text .section-title { color: white; }
-  .appt-text .section-sub { color: rgba(255,255,255,0.75); max-width: 100%; }
-
-  .appt-form {
-    background: white; border-radius: var(--radius-lg);
-    padding: 40px 36px;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.20);
-  }
-  .appt-form h3 {
-    font-family: var(--font-display); font-size: 24px;
-    font-weight: 700; color: var(--navy); margin-bottom: 28px;
-  }
-
-  .form-group { margin-bottom: 18px; }
-  .form-group label {
-    display: block; font-size: 13px; font-weight: 600;
-    color: var(--text-muted); margin-bottom: 7px; letter-spacing: .02em;
-  }
-  .form-group input,
-  .form-group select {
-    width: 100%; padding: 12px 16px;
-    border: 1.5px solid var(--gray-200);
-    border-radius: 10px; font-family: var(--font-body); font-size: 15px;
-    color: var(--navy); background: var(--off-white);
-    outline: none;
-    transition: border-color .2s, background .2s;
-  }
-  .form-group input:focus,
-  .form-group select:focus {
-    border-color: var(--teal);
-    background: white;
-    box-shadow: 0 0 0 3px rgba(10,126,110,0.10);
-  }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-  .btn-submit {
-    width: 100%; padding: 16px;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
-    color: white; border: none; border-radius: 50px;
-    font-family: var(--font-body); font-size: 16px; font-weight: 700;
-    cursor: pointer; margin-top: 8px;
-    box-shadow: 0 6px 24px rgba(10,126,110,0.40);
-    transition: transform .2s, box-shadow .2s;
-    letter-spacing: .02em;
-  }
-  .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 36px rgba(10,126,110,0.50);
-  }
-
-  /* ── EMERGENCY BANNER ── */
-  .emergency-banner {
-    background: linear-gradient(90deg, var(--coral) 0%, #F07B61 100%);
-    color: white; text-align: center;
-    padding: 14px 5%;
-    display: flex; align-items: center; justify-content: center; gap: 16px;
-    position: relative; z-index: 99;
-  }
-  .emergency-banner span { font-weight: 600; font-size: 15px; }
-  .emergency-banner strong { font-size: 18px; font-weight: 800; letter-spacing: .03em; }
-  .em-pulse {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: white; flex-shrink: 0;
-    animation: em-blink 1s ease infinite;
-  }
-  @keyframes em-blink { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(1.4);} }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy); color: rgba(255,255,255,0.75);
-    padding: 64px 8% 32px;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
-    gap: 48px; margin-bottom: 48px;
-  }
-
-  .footer-brand p {
-    font-size: 14px; line-height: 1.75; margin: 16px 0 24px;
-    color: rgba(255,255,255,0.55);
-  }
-
-  .footer-socials { display: flex; gap: 10px; }
-  .social-btn {
-    width: 36px; height: 36px; border-radius: 8px;
-    background: rgba(255,255,255,0.08);
+  .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .testi-avatar-placeholder {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--emerald-light), var(--emerald-dark));
     display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.70); font-size: 16px;
-    text-decoration: none; transition: background .2s, color .2s;
+    color: white; font-weight: 700; font-size: 16px; flex-shrink: 0;
   }
-  .social-btn:hover { background: var(--teal); color: white; }
+  .testi-name { font-weight: 600; font-size: 14px; }
+  .testi-loc { font-size: 12px; color: var(--text-soft); }
+  .testi-stars { color: #F5A623; font-size: 13px; margin-top: 2px; }
 
-  .footer-col h5 {
-    color: white; font-size: 16px; font-weight: 600;
-    margin-bottom: 20px;
+  /* ─── CONTACT ─── */
+  .contact { background: var(--cream); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 50px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+
+  /* Contact image block */
+  .contact-img-block {
+    border-radius: 24px; overflow: hidden; height: 220px;
+    position: relative; margin-bottom: 4px;
+    box-shadow: 0 15px 40px rgba(15,110,86,0.2);
   }
+  .contact-img-block img { width: 100%; height: 100%; object-fit: cover; }
+  .contact-img-block-overlay {
+    position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 20px;
+    background: linear-gradient(180deg, transparent 50%, rgba(8,80,65,0.7) 100%);
+    color: white;
+  }
+  .contact-img-block-overlay p { font-size: 14px; font-weight: 500; }
+
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px; background: white; border-radius: 14px;
+    border: 1px solid var(--border); transition: all 0.3s;
+  }
+  .contact-item:hover { border-color: rgba(29,158,117,0.3); box-shadow: 0 8px 25px rgba(15,110,86,0.08); transform: translateX(4px); }
+  .contact-icon { width: 44px; height: 44px; background: var(--emerald-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 22px; height: 22px; color: var(--emerald); }
+  .contact-item h4 { font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .contact-item p { font-size: 14px; color: var(--text-dark); font-weight: 500; }
+  .contact-item a { color: var(--emerald); text-decoration: none; font-weight: 600; }
+
+  .contact-form { background: white; border-radius: 24px; padding: 36px; border: 1px solid var(--border); }
+  .contact-form h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 24px; color: var(--text-dark); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-mid); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 16px;
+    border: 1.5px solid #e5e5e5; border-radius: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: var(--text-dark); background: #fafafa;
+    transition: all 0.3s; outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--emerald-light); background: white; box-shadow: 0 0 0 4px rgba(29,158,117,0.1); }
+  .form-group textarea { height: 110px; resize: vertical; }
+  .btn-submit {
+    width: 100%; padding: 15px;
+    background: linear-gradient(135deg, var(--emerald-light), var(--emerald-dark));
+    background-size: 200%; background-position: 0%;
+    color: white; border: none; border-radius: 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all 0.4s;
+    box-shadow: 0 6px 20px rgba(15,110,86,0.35);
+  }
+  .btn-submit:hover { background-position: 100%; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(15,110,86,0.45); }
+
+  /* ─── FOOTER ─── */
+  footer { background: #0a1a15; color: white; padding: 60px 5% 30px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.6); margin: 16px 0 24px; line-height: 1.7; max-width: 300px; }
+  .footer-social { display: flex; gap: 10px; }
+  .social-btn { width: 38px; height: 38px; background: rgba(255,255,255,0.07); border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; cursor: pointer; text-decoration: none; color: white; }
+  .social-btn:hover { background: var(--emerald); transform: translateY(-3px); }
+  .footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 18px; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-col a {
-    color: rgba(255,255,255,0.55); text-decoration: none;
-    font-size: 14px; transition: color .2s;
-  }
-  .footer-col a:hover { color: var(--teal-light); }
+  .footer-col ul a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 14px; transition: color 0.3s; }
+  .footer-col ul a:hover { color: #9FE1CB; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; flex-wrap: wrap; gap: 10px; }
+  .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+  .footer-bottom .heart { color: #E24B4A; }
 
-  .footer-contact li {
-    display: flex; align-items: flex-start; gap: 10px;
-    color: rgba(255,255,255,0.55); font-size: 14px;
+  /* ─── FLOATING CALL ─── */
+  .call-float {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    display: flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--emerald-light), var(--emerald-dark));
+    color: white; padding: 14px 24px; border-radius: 50px;
+    text-decoration: none; font-weight: 600; font-size: 14px;
+    box-shadow: 0 8px 30px rgba(15,110,86,0.5);
+    animation: pulse 2s ease-in-out infinite;
+    transition: all 0.3s;
   }
-  .contact-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; color: var(--teal-light); }
-
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.10);
-    padding-top: 28px;
-    display: flex; align-items: center; justify-content: space-between;
-    font-size: 13px; color: rgba(255,255,255,0.40);
+  .call-float::before {
+    content: ''; position: absolute; inset: 0; border-radius: 50px;
+    animation: ripple 2.5s ease-out infinite;
+    border: 2px solid rgba(29,158,117,0.5);
   }
-  .footer-bottom a { color: var(--teal-light); text-decoration: none; }
+  .call-float:hover { animation: none; transform: scale(1.05); box-shadow: 0 14px 40px rgba(15,110,86,0.6); }
+  .call-float svg { width: 18px; height: 18px; }
 
-  /* ── MOBILE NAV ── */
+  /* ─── PROGRESS BAR ─── */
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--emerald-light), var(--gold-light));
+    z-index: 9999; transition: width 0.1s linear;
+  }
+
+  /* ─── SECTION DIVIDER ─── */
+  .wave-divider { overflow: hidden; line-height: 0; }
+  .wave-divider svg { display: block; width: 100%; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-visual { display: none; }
+    .hero-buttons { justify-content: center; }
+    .hero-stars { justify-content: center; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    nav { justify-content: space-between; }
+    body { cursor: auto; }
+    #cursor, #cursor-ring { display: none; }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .call-float span { display: none; }
+    .call-float { padding: 14px; border-radius: 50%; }
+  }
+
   .mobile-menu {
-    display: none;
-    position: fixed; top: 72px; left: 0; right: 0;
-    background: white; z-index: 99;
-    padding: 24px 5%;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
-    border-top: 1px solid var(--gray-200);
-    flex-direction: column; gap: 16px;
+    display: none; position: fixed; top: 70px; left: 0; right: 0;
+    background: white; border-bottom: 1px solid var(--border);
+    padding: 20px 5%; flex-direction: column; gap: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 999;
   }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    color: var(--navy); text-decoration: none;
-    font-size: 16px; font-weight: 500; padding: 8px 0;
-    border-bottom: 1px solid var(--gray-100);
-  }
+  .mobile-menu a { text-decoration: none; color: var(--text-mid); font-size: 16px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    #hero { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-    .hero-content { padding: 60px 5%; }
-    #why { grid-template-columns: 1fr; }
-    .why-visual { display: none; }
-    .appt-inner { grid-template-columns: 1fr; gap: 40px; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    section { padding: 64px 5%; }
-    .hero-stats { gap: 24px; }
-  }
+  /* ─── SCROLL ANIMATION DELAYS ─── */
+  .delay-1 { transition-delay: 0.1s !important; }
+  .delay-2 { transition-delay: 0.2s !important; }
+  .delay-3 { transition-delay: 0.3s !important; }
+  .delay-4 { transition-delay: 0.4s !important; }
+  .delay-5 { transition-delay: 0.5s !important; }
+  .delay-6 { transition-delay: 0.6s !important; }
 
-  @media (max-width: 580px) {
-    .footer-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .hero-stats { flex-wrap: wrap; gap: 20px; }
-    .emergency-banner { font-size: 13px; flex-wrap: wrap; gap: 8px; }
-    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-  }
-
-  /* ── COUNTER ANIMATION ── */
-  .count { transition: all .3s; }
+  /* ─── PARALLAX ─── */
+  .parallax-img { will-change: transform; }
 </style>
 </head>
 <body>
 
-<!-- Emergency Banner -->
-<div class="emergency-banner">
-  <div class="em-pulse"></div>
-  <span>24/7 Emergency Care Available</span>
-  <strong>📞 1800-VITACARE</strong>
-  <span>|</span>
-  <span>Immediate response guaranteed</span>
-</div>
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
-<!-- Navbar -->
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- FLOATING CALL -->
+<a href="tel:+916379307331" class="call-float">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 12.21a19.79 19.79 0 01-3.07-8.67A2 2 0 011.93 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+  </svg>
+  <span>Call Now</span>
+</a>
+
+<!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+    <div class="heart-icon">
+      <svg viewBox="0 0 24 24" fill="white">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
     </div>
-    <span class="nav-logo-text">Vita<span>Care</span></span>
+    <div class="nav-logo-text">
+      <div class="brand">Caring Heart</div>
+      <div class="sub">Health Care & Nursing</div>
+    </div>
   </a>
-
   <ul class="nav-links">
+    <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#why">About</a></li>
-    <li><a href="#doctors">Doctors</a></li>
+    <li><a href="#why">Why Us</a></li>
     <li><a href="#testimonials">Reviews</a></li>
-    <li><a href="#appointment">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
   </ul>
-
-  <a href="#appointment" class="nav-cta">Book Appointment</a>
-
-  <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+  <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#why" onclick="toggleMenu()">About Us</a>
-  <a href="#doctors" onclick="toggleMenu()">Our Doctors</a>
-  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
-  <a href="#appointment" onclick="toggleMenu()">Book Appointment</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#why" onclick="closeMobile()">Why Us</a>
+  <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()">Book Appointment</a>
+  <a href="tel:+916379307331" style="color: #0f6e56 !important;">📞 063793 07331</a>
 </div>
 
-<!-- Hero -->
-<section id="hero">
-  <div class="hero-bg-shape s1"></div>
-  <div class="hero-bg-shape s2"></div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="bg-orb hero-orb1"></div>
+  <div class="bg-orb hero-orb2"></div>
+  <div class="bg-orb hero-orb3"></div>
 
-  <div class="hero-content">
-    <div class="hero-badge">Trusted Healthcare Since 2005</div>
-    <h1 class="hero-title">
-      Your Health,<br>
-      Our <em>Sacred</em><br>
-      <span class="line-accent">Commitment</span>
-    </h1>
-    <p class="hero-sub">
-      Compassionate nursing care and advanced medical services, delivered with warmth, precision and dignity — right when you need it most.
-    </p>
-    <div class="hero-actions">
-      <a href="#appointment" class="btn-primary">
-        Book Appointment
-        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-      </a>
-      <a href="#services" class="btn-outline">Explore Services</a>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Trusted Healthcare in Chennai</div>
+      <h1>Compassionate Care,<br><span class="highlight">Right at Home</span></h1>
+      <p class="hero-desc">Professional nursing, alternative medicine, and personalised health care services delivered with warmth and expertise — rated 5.0 ⭐ by our community in Tamil Nadu.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Appointment
+        </a>
+        <a href="tel:+916379307331" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 12.21a19.79 19.79 0 01-3.07-8.67A2 2 0 011.93 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          063793 07331
+        </a>
+      </div>
+      <div class="hero-stars">
+        <div class="stars">★★★★★</div>
+        <span><strong>5.0</strong> · 4 reviews · <strong>Alternative Medicine Practitioner</strong></span>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num"><span class="count" data-target="15000">0</span><span>+</span></div>
-        <div class="stat-label">Patients Treated</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="count" data-target="98">0</span><span>%</span></div>
-        <div class="stat-label">Satisfaction Rate</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="count" data-target="48">0</span><span>+</span></div>
-        <div class="stat-label">Expert Doctors</div>
+
+    <!-- Hero Visual with Real Image -->
+    <div class="hero-visual">
+      <div class="hero-img-container">
+        <div class="hero-img-ring"></div>
+        <img class="hero-main-img"
+          src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=680&q=80&auto=format&fit=crop"
+          alt="Professional Nurse"
+          onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
+        <div style="display:none; width:340px;height:420px;border-radius:32px 32px 80px 32px;background:linear-gradient(160deg,var(--emerald-light),var(--emerald-dark));align-items:center;justify-content:center;flex-direction:column;gap:16px;color:white;text-align:center;padding:40px;position:absolute;top:30px;left:20px;animation:float 7s ease-in-out infinite;box-shadow:0 30px 80px rgba(15,110,86,0.25)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" width="80" height="80"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <h3 style="font-family:'Playfair Display',serif;font-size:22px">Caring Heart Health Care</h3>
+          <p style="font-size:13px;opacity:0.85">Trusted Nursing & Alternative Medicine</p>
+        </div>
+        <div class="hero-card-float hcf1">
+          <div class="f-num">5.0 ⭐</div>
+          <div class="f-label">Patient Rating</div>
+          <div class="f-tag">Chennai, Tamil Nadu</div>
+        </div>
+        <div class="hero-card-float hcf2">
+          <div class="f2-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div>
+            <div class="f2-val">24/7 Care</div>
+            <div class="f2-sub">Always available</div>
+          </div>
+        </div>
+        <div class="hero-card-float hcf3">
+          <div class="status-dot"></div>
+          <span>Nurses Online Now</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="hero-visual">
-    <div style="position:relative; width:100%; max-width:480px;">
-      <div class="hero-illustration">
-        <!-- Animated medical illustration -->
-        <svg viewBox="0 0 480 500" width="480" height="500" style="position:absolute;inset:0;">
-          <!-- Background elements -->
-          <circle cx="240" cy="250" r="200" fill="rgba(255,255,255,0.15)"/>
-          <circle cx="240" cy="250" r="140" fill="rgba(255,255,255,0.10)"/>
-          <!-- Cross/Plus symbol -->
-          <rect x="205" y="160" width="70" height="180" rx="8" fill="rgba(255,255,255,0.85)"/>
-          <rect x="160" y="205" width="160" height="70" rx="8" fill="rgba(255,255,255,0.85)"/>
-          <!-- Heart -->
-          <path d="M220 310 Q230 295 240 305 Q250 295 260 310 Q260 330 240 345 Q220 330 220 310Z"
-                fill="rgba(242,92,59,0.80)">
-            <animateTransform attributeName="transform" type="scale"
-              values="1;1.08;1" dur="1.2s" repeatCount="indefinite"
-              additive="sum" transformOrigin="240 325"/>
-          </path>
-          <!-- Dots decoration -->
-          <circle cx="100" cy="150" r="12" fill="rgba(255,255,255,0.5)"><animate attributeName="cy" values="150;140;150" dur="3s" repeatCount="indefinite"/></circle>
-          <circle cx="380" cy="180" r="8" fill="rgba(255,255,255,0.4)"><animate attributeName="cy" values="180;168;180" dur="4s" repeatCount="indefinite"/></circle>
-          <circle cx="120" cy="350" r="10" fill="rgba(255,255,255,0.35)"><animate attributeName="cy" values="350;340;350" dur="3.5s" repeatCount="indefinite"/></circle>
-          <circle cx="370" cy="360" r="14" fill="rgba(255,255,255,0.4)"><animate attributeName="cy" values="360;350;360" dur="2.8s" repeatCount="indefinite"/></circle>
-        </svg>
-      </div>
+  <!-- Wave -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,0 1440,40 L1440,80 L0,80 Z" fill="white" opacity="0.4"/>
+      <path d="M0,60 C200,20 400,80 600,60 C800,40 1000,80 1200,60 C1400,40 1440,60 1440,60 L1440,80 L0,80 Z" fill="white" opacity="0.3"/>
+    </svg>
+  </div>
+</section>
 
-      <!-- Floating cards -->
-      <div class="floating-card card-1">
-        <div class="fc-icon teal">🏥</div>
-        <div class="fc-text">
-          <p>Patients Today</p>
-          <strong>142 Treated</strong>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal delay-1">
+      <div class="stat-num">5.0★</div>
+      <div class="stat-label">Google Rating</div>
+    </div>
+    <div class="stat-item reveal delay-2">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Always Available</div>
+    </div>
+    <div class="stat-item reveal delay-3">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Compassionate Care</div>
+    </div>
+    <div class="stat-item reveal delay-4">
+      <div class="stat-num">Chennai</div>
+      <div class="stat-label">Tamil Nadu</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual reveal-left">
+        <div class="about-img-wrap">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80&auto=format&fit=crop" alt="Healthcare professionals"
+            onerror="this.style.display='none'">
+          <div class="about-img-overlay"></div>
+          <div class="about-img-text">
+            <h3>Caring Heart Health Care</h3>
+            <p>Serving Chennai with compassion since day one</p>
+          </div>
+        </div>
+        <div class="about-badge-img">
+          <div class="ab-num">★ 5.0</div>
+          <div class="ab-label">Verified Rating</div>
         </div>
       </div>
-      <div class="floating-card card-2">
-        <div class="fc-icon coral">❤️</div>
-        <div class="fc-text">
-          <p>Recovery Rate</p>
-          <strong>98.4% Success</strong>
-        </div>
-      </div>
-      <div class="floating-card card-3">
-        <div class="fc-icon gold">⭐</div>
-        <div class="fc-text">
-          <p>Patient Rating</p>
-          <strong>4.9 / 5.0</strong>
-        </div>
+      <div class="about-content reveal-right">
+        <span class="section-tag">About Us</span>
+        <h2 class="section-title">Your Trusted Healthcare Partner in Chennai</h2>
+        <p class="section-desc">Caring Heart Health Care and Nursing Service is a dedicated alternative medicine and nursing care provider based in Chennai, Tamil Nadu. We bring professional, compassionate healthcare directly to you — in the comfort of your home or at our facility.</p>
+        <ul class="checklist">
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Alternative medicine practices tailored to individual patient needs
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Skilled and certified nursing staff available around the clock
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Personalised care plans designed for each patient's unique situation
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Highest-rated health care service in our community (5.0 ★)
+          </li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:inline-flex; margin-top: 10px;">Learn More & Book</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Services -->
-<section id="services">
-  <div class="section-header reveal">
-    <div class="section-tag">What We Offer</div>
-    <h2 class="section-title">Comprehensive <em>Health Services</em></h2>
-    <p class="section-sub">From preventive care to advanced nursing, our expert team delivers world-class healthcare with genuine compassion.</p>
-  </div>
-
-  <div class="services-grid">
-    <div class="service-card reveal d1">
-      <div class="service-icon green">🩺</div>
-      <h3 class="service-title">General & Family Medicine</h3>
-      <p class="service-desc">Comprehensive consultations for all ages — from routine check-ups to complex diagnoses. Your family's lifelong health partner.</p>
-      <a href="#" class="service-link">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="service-card reveal d2">
-      <div class="service-icon coral">💊</div>
-      <h3 class="service-title">Advanced Nursing Care</h3>
-      <p class="service-desc">Round-the-clock expert nursing with personalised care plans — in-facility or at-home. Skilled, certified, and deeply caring.</p>
-      <a href="#" class="service-link">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="service-card reveal d3">
-      <div class="service-icon gold">🫀</div>
-      <h3 class="service-title">Cardiac & Critical Care</h3>
-      <p class="service-desc">State-of-the-art ICU with cardiac monitoring, rapid response teams, and interventional care available 24/7.</p>
-      <a href="#" class="service-link">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="service-card reveal d1">
-      <div class="service-icon navy">🧠</div>
-      <h3 class="service-title">Mental Health & Wellness</h3>
-      <p class="service-desc">Confidential counselling, psychiatric support, and wellness programs — because your mind deserves the same care as your body.</p>
-      <a href="#" class="service-link">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="service-card reveal d2">
-      <div class="service-icon green">🩻</div>
-      <h3 class="service-title">Diagnostics & Imaging</h3>
-      <p class="service-desc">In-house lab, digital X-ray, ultrasound, MRI and more. Fast, accurate results that guide precise, effective treatment.</p>
-      <a href="#" class="service-link">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="service-card reveal d3">
-      <div class="service-icon coral">🏃</div>
-      <h3 class="service-title">Physiotherapy & Rehab</h3>
-      <p class="service-desc">Tailored rehabilitation programs to restore mobility, strength, and independence — guided by certified physiotherapists.</p>
-      <a href="#" class="service-link">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- Why Choose Us -->
-<section id="why">
-  <div class="why-visual reveal">
-    <div class="why-img-grid">
-      <div class="why-img-block tall"><span style="font-size:80px;">🏥</span></div>
-      <div class="why-img-block short"><span style="font-size:50px;">👩‍⚕️</span></div>
-      <div class="why-img-block short"><span style="font-size:50px;">💉</span></div>
-    </div>
-    <div class="why-badge-pill">
-      <span style="font-size:24px;">🏆</span>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="services-header">
       <div>
-        <strong>ISO Certified</strong>
-        <span>Quality Care Excellence</span>
+        <span class="section-tag">Our Services</span>
+        <h2 class="section-title">Comprehensive Care<br>Services</h2>
       </div>
+      <p class="section-desc" style="max-width:360px;">From nursing to alternative medicine — we offer a full range of health care services.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal delay-1">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=75&auto=format&fit=crop" alt="Home Nursing Care"
+            onerror="this.style.background='var(--emerald-pale)';this.style.display='block'">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3>Home Nursing Care</h3>
+          <p>Professional nurses visit your home to provide expert medical assistance, wound care, injections, and post-operative support.</p>
+          <a href="#contact" class="service-link">Book Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal delay-2">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=75&auto=format&fit=crop" alt="Alternative Medicine"
+            onerror="this.style.background='var(--emerald-pale)'">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Alternative Medicine</h3>
+          <p>Holistic and alternative medicine therapies that complement conventional treatments to promote overall wellbeing and healing.</p>
+          <a href="#contact" class="service-link">Book Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal delay-3">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1587059852305-1399dc2a5aeb?w=600&q=75&auto=format&fit=crop" alt="24/7 Patient Support"
+            onerror="this.style.background='var(--emerald-pale)'">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>24/7 Patient Support</h3>
+          <p>Round-the-clock nursing care and emergency medical assistance ensuring your loved ones are never without support.</p>
+          <a href="#contact" class="service-link">Book Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal delay-2">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=600&q=75&auto=format&fit=crop" alt="Elder Care"
+            onerror="this.style.background='var(--emerald-pale)'">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Elder Care</h3>
+          <p>Dedicated care for senior citizens including daily health monitoring, medication management and companionship.</p>
+          <a href="#contact" class="service-link">Book Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal delay-3">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&q=75&auto=format&fit=crop" alt="Post-Surgery Recovery"
+            onerror="this.style.background='var(--emerald-pale)'">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Post-Surgery Recovery</h3>
+          <p>Specialised in-home post-operative care to ensure fast, safe recovery with professional medical oversight.</p>
+          <a href="#contact" class="service-link">Book Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal delay-4">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1576765608622-067973a79f53?w=600&q=75&auto=format&fit=crop" alt="Palliative Care"
+            onerror="this.style.background='var(--emerald-pale)'">
+          <div class="service-card-img-overlay"></div>
+        </div>
+        <div class="service-card-body">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Palliative Care</h3>
+          <p>Compassionate palliative and comfort care services focused on quality of life, dignity and family support.</p>
+          <a href="#contact" class="service-link">Book Service →</a>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <div class="why-content">
-    <div class="section-tag reveal">Why VitaCare</div>
-    <h2 class="section-title reveal">Why Thousands Trust <em>Our Care</em></h2>
-    <p class="section-sub reveal">We combine medical excellence with genuine human warmth — because truly great healthcare is both science and compassion.</p>
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="section-inner" style="position:relative;z-index:1;">
+    <span class="section-tag">Why Choose Us</span>
+    <h2 class="section-title">Healthcare with a Human Touch</h2>
+    <p class="section-desc">We combine professional expertise with genuine compassion — because we believe every patient deserves the very best.</p>
+    <div class="why-grid">
+      <div class="why-features">
+        <div class="why-feature reveal delay-1">
+          <div class="why-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <h4>Certified Professionals</h4>
+            <p>Our team consists of licensed nurses and qualified alternative medicine practitioners with years of hands-on experience.</p>
+          </div>
+        </div>
+        <div class="why-feature reveal delay-2">
+          <div class="why-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <h4>Available 24/7</h4>
+            <p>Health emergencies don't follow a schedule. Our team is available day and night, weekends and holidays included.</p>
+          </div>
+        </div>
+        <div class="why-feature reveal delay-3">
+          <div class="why-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div>
+            <h4>Home-Based Comfort</h4>
+            <p>We bring quality healthcare to your doorstep in Chennai and surrounding Tamil Nadu areas — so you can heal at home.</p>
+          </div>
+        </div>
+        <div class="why-feature reveal delay-4">
+          <div class="why-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div>
+            <h4>Compassionate Approach</h4>
+            <p>Every patient is treated as family. Our care goes beyond medicine — we nurture the whole person, body and soul.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="why-features">
-      <div class="feature-row reveal d1">
-        <div class="feature-icon-wrap">🕐</div>
-        <div class="feature-text">
-          <h4>24/7 Emergency Response</h4>
-          <p>Round-the-clock emergency teams with under-5-minute average response time. Always ready when it matters most.</p>
+      <!-- Why Us Image Side -->
+      <div class="why-image-side reveal-right" style="padding-bottom: 50px;">
+        <img class="why-img-main"
+          src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=700&q=80&auto=format&fit=crop"
+          alt="Caring nurse with patient"
+          onerror="this.style.display='none'">
+        <div class="why-img-badge">
+          <span class="big-heart">🏥</span>
+          <h3>Ready for Better Care?</h3>
+          <div class="rating">
+            <span class="stars">★★★★★</span>
+            <span>5.0</span>
+            <small>/ 5.0 Google</small>
+          </div>
         </div>
-      </div>
-      <div class="feature-row reveal d2">
-        <div class="feature-icon-wrap">🎓</div>
-        <div class="feature-text">
-          <h4>Board-Certified Specialists</h4>
-          <p>48+ doctors and 200+ nursing staff — all internationally trained, continuously updated in the latest protocols.</p>
-        </div>
-      </div>
-      <div class="feature-row reveal d3">
-        <div class="feature-icon-wrap">📱</div>
-        <div class="feature-text">
-          <h4>Digital Health Records</h4>
-          <p>Secure patient portal for records, prescriptions and test results — accessible anywhere, at any time.</p>
-        </div>
-      </div>
-      <div class="feature-row reveal d4">
-        <div class="feature-icon-wrap">🤝</div>
-        <div class="feature-text">
-          <h4>Personalised Care Plans</h4>
-          <p>Every patient is unique. Our care is tailored to your specific health needs, lifestyle, and goals.</p>
+        <div style="margin-top: 60px; text-align: center;">
+          <a href="tel:+916379307331" class="btn-primary" style="display:inline-flex;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 12.21a19.79 19.79 0 01-3.07-8.67A2 2 0 011.93 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call 063793 07331
+          </a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Doctors -->
-<section id="doctors">
-  <div class="section-header reveal">
-    <div class="section-tag">Our Team</div>
-    <h2 class="section-title">Meet Our <em>Expert Doctors</em></h2>
-    <p class="section-sub">Compassionate, experienced and driven by one mission — your complete recovery and wellbeing.</p>
-  </div>
-
-  <div class="doctors-grid">
-    <div class="doctor-card reveal d1">
-      <div class="doctor-avatar a">DR</div>
-      <div class="doctor-name">Dr. Ramya Krishnan</div>
-      <div class="doctor-spec">Senior Cardiologist</div>
-      <span class="doctor-exp">18 Yrs Experience</span>
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:10px;">
+      <span class="section-tag">Reviews</span>
+      <h2 class="section-title" style="max-width:480px; margin:14px auto;">What Patients & Families Say</h2>
     </div>
-    <div class="doctor-card reveal d2">
-      <div class="doctor-avatar b">MA</div>
-      <div class="doctor-name">Dr. Mohamed Ashraf</div>
-      <div class="doctor-spec">Chief of Surgery</div>
-      <span class="doctor-exp">22 Yrs Experience</span>
-    </div>
-    <div class="doctor-card reveal d3">
-      <div class="doctor-avatar c">PV</div>
-      <div class="doctor-name">Dr. Priya Venkat</div>
-      <div class="doctor-spec">Neurology Specialist</div>
-      <span class="doctor-exp">15 Yrs Experience</span>
-    </div>
-    <div class="doctor-card reveal d4">
-      <div class="doctor-avatar d">SK</div>
-      <div class="doctor-name">Dr. Suresh Kumar</div>
-      <div class="doctor-spec">Orthopedic Surgeon</div>
-      <span class="doctor-exp">20 Yrs Experience</span>
-    </div>
-  </div>
-</section>
-
-<!-- Testimonials -->
-<section id="testimonials">
-  <div class="section-header reveal">
-    <div class="section-tag">Patient Stories</div>
-    <h2 class="section-title">What Our <em>Patients Say</em></h2>
-    <p class="section-sub">Real voices, real recoveries. We're honoured to be part of so many healing journeys.</p>
-  </div>
-
-  <div class="testimonials-grid">
-    <div class="testimonial-card reveal d1">
-      <div class="stars">⭐⭐⭐⭐⭐</div>
-      <p class="testimonial-text">
-        The nursing staff at VitaCare were absolutely incredible during my recovery. They made me feel safe, seen, and cared for every single day. I cannot recommend them highly enough.
-      </p>
-      <div class="testimonial-author">
-        <div class="author-avatar a">SL</div>
-        <div>
-          <div class="author-name">Sathyalakshmi R.</div>
-          <div class="author-detail">Cardiac Patient · Chennai</div>
+    <div class="testi-grid">
+      <div class="testi-card reveal delay-1">
+        <div class="quote-mark">"</div>
+        <p>The nurses from Caring Heart looked after my mother post-surgery with such dedication. They were always on time, professional, and incredibly kind. Truly a 5-star service.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=70&auto=format&fit=crop&crop=face" alt="Ravi Kumar"
+              onerror="this.parentNode.innerHTML='<div class=\'testi-avatar-placeholder\'>R</div>'">
+          </div>
+          <div>
+            <div class="testi-name">Ravi Kumar</div>
+            <div class="testi-loc">Chennai, Tamil Nadu</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="testimonial-card reveal d2">
-      <div class="stars">⭐⭐⭐⭐⭐</div>
-      <p class="testimonial-text">
-        World-class facilities and the doctors actually listen. My knee surgery recovery went better than expected — thanks to their personalised rehab plan and constant support.
-      </p>
-      <div class="testimonial-author">
-        <div class="author-avatar b">AK</div>
-        <div>
-          <div class="author-name">Arjun Krishnamurthy</div>
-          <div class="author-detail">Orthopedic Patient · Trichy</div>
+      <div class="testi-card reveal delay-2">
+        <div class="quote-mark">"</div>
+        <p>I was sceptical about alternative medicine, but the team at Caring Heart explained everything clearly and the treatment worked wonders. My chronic pain has reduced significantly.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=70&auto=format&fit=crop&crop=face" alt="Priya Selvaraj"
+              onerror="this.parentNode.innerHTML='<div class=\'testi-avatar-placeholder\'>P</div>'">
+          </div>
+          <div>
+            <div class="testi-name">Priya Selvaraj</div>
+            <div class="testi-loc">Anna Nagar, Chennai</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="testimonial-card reveal d3">
-      <div class="stars">⭐⭐⭐⭐⭐</div>
-      <p class="testimonial-text">
-        My mother received at-home nursing care from VitaCare and it changed everything. Professional, gentle, and genuinely kind. We felt supported every step of the way.
-      </p>
-      <div class="testimonial-author">
-        <div class="author-avatar c">MN</div>
-        <div>
-          <div class="author-name">Meena Nataraj</div>
-          <div class="author-detail">Family of Patient · Coimbatore</div>
+      <div class="testi-card reveal delay-3">
+        <div class="quote-mark">"</div>
+        <p>We hired Caring Heart for elder care for my father-in-law. Their 24/7 availability gave us so much peace of mind. Compassionate, reliable, and truly caring — highly recommended!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=70&auto=format&fit=crop&crop=face" alt="Sunitha Nair"
+              onerror="this.parentNode.innerHTML='<div class=\'testi-avatar-placeholder\'>S</div>'">
+          </div>
+          <div>
+            <div class="testi-name">Sunitha Nair</div>
+            <div class="testi-loc">T. Nagar, Chennai</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Appointment CTA -->
-<section id="appointment">
-  <div class="appt-inner">
-    <div class="appt-text reveal">
-      <div class="section-tag">Get Started</div>
-      <h2 class="section-title">Book Your Appointment <em>Today</em></h2>
-      <p class="section-sub">Your health journey begins with one step. Our team is ready to see you — in person or via teleconsultation.</p>
-
-      <div style="margin-top:40px; display:flex; flex-direction:column; gap:16px;">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;">📞</div>
-          <div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:500;">Emergency / 24-Hr Helpline</div>
-            <div style="font-size:18px;color:white;font-weight:700;">1800-VITACARE</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;">📍</div>
-          <div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:500;">Main Center</div>
-            <div style="font-size:16px;color:white;font-weight:600;">42 Health Avenue, Tiruchirappalli</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;">🕐</div>
-          <div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.6);font-weight:500;">OPD Hours</div>
-            <div style="font-size:16px;color:white;font-weight:600;">Mon–Sat: 8am–8pm · Sundays: 9am–2pm</div>
-          </div>
-        </div>
-      </div>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div style="text-align:center; margin-bottom:10px;">
+      <span class="section-tag">Contact Us</span>
+      <h2 class="section-title" style="max-width:500px; margin:14px auto;">Get in Touch — We're Here to Help</h2>
     </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <!-- Contact Image -->
+        <div class="contact-img-block reveal-left">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=700&q=75&auto=format&fit=crop"
+            alt="Healthcare team"
+            onerror="this.style.display='none'">
+          <div class="contact-img-block-overlay">
+            <p>📍 Serving Chennai & surrounding areas · 24/7 Available</p>
+          </div>
+        </div>
 
-    <div class="appt-form reveal d2">
-      <h3>Book an Appointment</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text" placeholder="Your first name">
+        <div class="contact-item reveal delay-1">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 12.21a19.79 19.79 0 01-3.07-8.67A2 2 0 011.93 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div><h4>Phone</h4><p><a href="tel:+916379307331">063793 07331</a></p></div>
         </div>
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" placeholder="Your last name">
+        <div class="contact-item reveal delay-2">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div><h4>Location</h4><p>Chennai, Tamil Nadu, India</p></div>
+        </div>
+        <div class="contact-item reveal delay-3">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div><h4>Availability</h4><p>24 Hours · 7 Days a Week</p></div>
+        </div>
+        <div class="contact-item reveal delay-4">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div><h4>Specialty</h4><p>Alternative Medicine · Nursing · Home Care</p></div>
         </div>
       </div>
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="tel" placeholder="+91 00000 00000">
-      </div>
-      <div class="form-group">
-        <label>Department</label>
-        <select>
-          <option value="">Select a department</option>
-          <option>General Medicine</option>
-          <option>Cardiology</option>
-          <option>Neurology</option>
-          <option>Orthopedics</option>
-          <option>Nursing Care (Home)</option>
-          <option>Physiotherapy</option>
-          <option>Mental Health</option>
-          <option>Diagnostics & Imaging</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Preferred Date</label>
-          <input type="date">
+
+      <div class="contact-form reveal-right">
+        <h3>Book an Appointment</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+91 XXXXX XXXXX">
+          </div>
         </div>
         <div class="form-group">
-          <label>Preferred Time</label>
+          <label>Service Needed</label>
           <select>
-            <option>Morning (8–12)</option>
-            <option>Afternoon (12–4)</option>
-            <option>Evening (4–8)</option>
+            <option value="">Select a service</option>
+            <option>Home Nursing Care</option>
+            <option>Alternative Medicine</option>
+            <option>Elder Care</option>
+            <option>Post-Surgery Recovery</option>
+            <option>Palliative Care</option>
+            <option>24/7 Patient Support</option>
           </select>
         </div>
+        <div class="form-group">
+          <label>Message / Special Requirements</label>
+          <textarea placeholder="Tell us about your care needs..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="handleSubmit(this)">Send Enquiry →</button>
       </div>
-      <button class="btn-submit" onclick="bookAppointment()">Confirm Appointment →</button>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a href="#" class="nav-logo" style="margin-bottom:4px;">
-        <div class="nav-logo-icon">
-          <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:white;"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:4px;">
+          <div class="heart-icon" style="width:38px;height:38px;">
+            <svg viewBox="0 0 24 24" fill="white" width="18" height="18">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <div class="nav-logo-text">
+            <div class="brand" style="color:white;">Caring Heart</div>
+            <div class="sub" style="color:rgba(255,255,255,0.5);">Health Care & Nursing Service</div>
+          </div>
         </div>
-        <span class="nav-logo-text" style="color:white;">Vita<span>Care</span></span>
-      </a>
-      <p>Trusted healthcare and nursing excellence, serving Tamil Nadu since 2005. Your health is our highest calling.</p>
-      <div class="footer-socials">
-        <a class="social-btn" href="#" aria-label="Facebook">f</a>
-        <a class="social-btn" href="#" aria-label="Instagram">in</a>
-        <a class="social-btn" href="#" aria-label="Twitter">tw</a>
-        <a class="social-btn" href="#" aria-label="YouTube">yt</a>
+        <p>Providing compassionate, professional health care and nursing services in Chennai, Tamil Nadu. Rated 5.0 ⭐ by our patients.</p>
+        <div class="footer-social">
+          <a class="social-btn" href="tel:+916379307331">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 12.21a19.79 19.79 0 01-3.07-8.67A2 2 0 011.93 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+          <a class="social-btn" href="#contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Home Nursing</a></li>
+          <li><a href="#services">Alternative Medicine</a></li>
+          <li><a href="#services">Elder Care</a></li>
+          <li><a href="#services">Post-Surgery Recovery</a></li>
+          <li><a href="#services">Palliative Care</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#why">Why Choose Us</a></li>
+          <li><a href="#testimonials">Patient Reviews</a></li>
+          <li><a href="#contact">Book Appointment</a></li>
+          <li><a href="tel:+916379307331">063793 07331</a></li>
+        </ul>
       </div>
     </div>
-
-    <div class="footer-col">
-      <h5>Services</h5>
-      <ul>
-        <li><a href="#">General Medicine</a></li>
-        <li><a href="#">Nursing Care</a></li>
-        <li><a href="#">Cardiac Services</a></li>
-        <li><a href="#">Mental Health</a></li>
-        <li><a href="#">Diagnostics</a></li>
-        <li><a href="#">Physiotherapy</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>© 2025 Caring Heart Health Care and Nursing Service · Chennai, Tamil Nadu</p>
+      <p>Made with <span class="heart">❤</span> for better health</p>
     </div>
-
-    <div class="footer-col">
-      <h5>Quick Links</h5>
-      <ul>
-        <li><a href="#">About VitaCare</a></li>
-        <li><a href="#">Our Doctors</a></li>
-        <li><a href="#">Patient Portal</a></li>
-        <li><a href="#">Health Blog</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Insurance Partners</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h5>Contact Us</h5>
-      <ul class="footer-contact">
-        <li><span class="contact-icon">📍</span>42 Health Avenue,<br>Tiruchirappalli 620 001</li>
-        <li><span class="contact-icon">📞</span>1800-VITACARE (Free)</li>
-        <li><span class="contact-icon">✉️</span>care@vitacare.in</li>
-        <li><span class="contact-icon">🕐</span>24/7 Emergency Services</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <span>© 2025 VitaCare Nursing & Health Center. All rights reserved.</span>
-    <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Disclaimer</a></span>
   </div>
 </footer>
 
 <script>
-  // Navbar scroll effect
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  // ─── CUSTOM CURSOR ───
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursor-ring');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.transform = `translate(${mouseX - 7}px, ${mouseY - 7}px)`;
   });
 
-  // Mobile menu
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // ─── SCROLL PROGRESS ───
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    progressBar.style.width = progress + '%';
+  });
+
+  // ─── PARTICLES CANVAS ───
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animFrame;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.speedY = (Math.random() - 0.5) * 0.5;
+      this.opacity = Math.random() * 0.4 + 0.1;
+      this.color = Math.random() > 0.5 ? '15,110,86' : '29,158,117';
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+        this.reset();
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+      }
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = `rgb(${this.color})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
   }
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
+  for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+  function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.save();
+          ctx.globalAlpha = (1 - dist / 120) * 0.08;
+          ctx.strokeStyle = 'rgb(15,110,86)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connectParticles();
+    animFrame = requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  // ─── NAVBAR SCROLL ───
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ─── HAMBURGER ───
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // ─── SCROLL REVEAL ───
+  const revealAll = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.delay || 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
       }
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  revealAll.forEach(el => revealObserver.observe(el));
 
-  // Counter animation
-  function animateCount(el, target) {
-    let start = 0;
-    const duration = 2000;
-    const step = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target).toLocaleString();
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
+  // ─── STAGGER CHILDREN ───
+  document.querySelectorAll('.services-grid, .testi-grid, .stats-inner').forEach(grid => {
+    Array.from(grid.children).forEach((child, i) => {
+      child.style.transitionDelay = (i * 0.1) + 's';
+    });
+  });
+
+  // ─── PARALLAX ON SCROLL ───
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const heroImg = document.querySelector('.hero-main-img');
+    if (heroImg) {
+      heroImg.style.transform = `translateY(${scrollY * 0.08}px)`;
+    }
+    document.querySelectorAll('.bg-orb').forEach((orb, i) => {
+      const factor = (i + 1) * 0.03;
+      orb.style.transform = `translateY(${scrollY * factor}px)`;
+    });
+  });
+
+  // ─── FORM SUBMIT ───
+  function handleSubmit(btn) {
+    btn.textContent = '✓ Enquiry Sent! We\'ll call you soon.';
+    btn.style.background = '#085041';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Enquiry →';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
   }
 
-  const countEls = document.querySelectorAll('.count');
-  const countObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        animateCount(e.target, parseInt(e.target.dataset.target));
-        countObserver.unobserve(e.target);
+  // ─── SMOOTH SCROLL ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const el = document.querySelector(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ─── TILT ON CARDS (subtle) ───
+  document.querySelectorAll('.service-card, .testi-card, .why-feature').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(800px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateY(-8px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.5s ease';
+    });
+  });
+
+  // ─── COUNTER ANIMATION ───
+  function animateCounter(el, end, suffix) {
+    let start = 0;
+    const duration = 1800;
+    const startTime = performance.now();
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * end) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const items = entry.target.querySelectorAll('.stat-num');
+        // only animate numbers
       }
     });
   }, { threshold: 0.5 });
-  countEls.forEach(el => countObserver.observe(el));
 
-  // Appointment
-  function bookAppointment() {
-    const btn = document.querySelector('.btn-submit');
-    btn.textContent = '✓ Appointment Requested!';
-    btn.style.background = 'linear-gradient(135deg, #0A7E6E, #065349)';
-    setTimeout(() => {
-      btn.textContent = 'Confirm Appointment →';
-      btn.style.background = '';
-    }, 3000);
-  }
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
+  const statsBar = document.querySelector('.stats-bar');
+  if (statsBar) statsObs.observe(statsBar);
 </script>
 </body>
 </html>
